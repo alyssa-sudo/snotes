@@ -80,9 +80,9 @@ do
 done
 
 # If period and type aren't set, exit immediately
-if [ -z "$period" ] || [ -z "$type" ]
+if [ -z "$class" ] || [ -z "$type" ]
 then
-	msg "period or type was not specified"
+	msg "class or type was not specified"
 	usage 1
 fi
 
@@ -95,8 +95,8 @@ then filename=$larg.md
 else filename=$(date +%F).md
 fi
 
-mkdir -p "$SNOTES_BASE/$period/$type" || exit 1
+mkdir -p "$SNOTES_BASE/$class/$type" || exit 1
 
-$texteditor "$SNOTES_BASE/$period/$type/$filename" || {
+$texteditor "$SNOTES_BASE/$class/$type/$filename" || {
 	msg "an error occured"
 }
