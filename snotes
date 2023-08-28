@@ -12,7 +12,7 @@ name=${0##*/}
 		&& documents=$(xdg-user-dir DOCUMENTS) \
 		|| documents="$HOME/Documents"
 
-	SNOTES_BASE="$documents/school"
+	SNOTES_BASE="$documents/School"
 }
 
 # Usage Statement
@@ -20,11 +20,11 @@ usage() {
 	while read -r line
 	do printf '%b\n' "$line"
 	done <<-USAGE
-	usage: $name [OPTIONS] -p <PERIOD> -t <TYPE> [-- FILENAME]
+	usage: $name [OPTIONS] -c <CLASS> -t <TYPE> [-- FILENAME]
 
 	options:
 	-h	display this message
-	-p	specify the period
+	-c	specify the period
 	-t	specify the note type
 
 	If a filename is not specified, the current date (\`date +%F\`) will used.
@@ -60,7 +60,7 @@ do
 		-  ) shift; continue ;;          # Empty flag, Do Nothing
 		-- ) shift; break ;;             # Stop processing arguments
 		-* ) flag=${1#-}; shift ;;       # Remove leading `-` from flag and process
-		*  ) larg=$1; shift; continue ;; # Option arguments (<PERIOD>, <TYPE>, etc)
+		*  ) larg=$1; shift; continue ;; # Option arguments (<CLASS>, <TYPE>, etc)
 	esac
 
 	# Break the flag into arguments and do setup
@@ -70,7 +70,7 @@ do
 
 		case $arg in
 			h ) usage 0 ;;
-			p ) period=$1; shift ;;
+			c ) class=$1; shift ;;
 			t ) type=$1; shift ;;
 			* ) msg f "-$arg: invalid argument" ;;
 		esac
